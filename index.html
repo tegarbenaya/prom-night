@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- External Resources -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <title>Prom Night</title>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Font Family Definitions */
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Video Background Styling */
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+        
+        /* Content Overlay Styling */
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Animation Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        
+        /* Initial Animation State */
+        [class*="animate-"] {
+            opacity: 0;
+        }
+        
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 768px) {
+            .video-background { object-position: center; }
+            .text-6xl { font-size: 3rem; }
+            .text-3xl { font-size: 1.5rem; }
+            .text-xl { font-size: 1rem; }
+            .w-24, .h-24 { width: 4rem; height: 4rem; }
+            .p-4 { padding: 0.75rem; }
+            .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+                --tw-space-y-reverse: 0;
+                margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+                margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+            }
+            .mb-8 { margin-bottom: 1.5rem; }
+            .mb-5 { margin-bottom: 1rem; }
+            .my-8 { margin: 1.5rem 0; }
+            .text-lg { font-size: 0.875rem; }
+            .px-6 { padding: 0 1rem; }
+            .py-3 { padding: 0.5rem 0; }
+            .gap-4 { gap: 0.75rem; }
+            .text-md { font-size: 0.875rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <!-- Background Video -->
+    <video autoplay muted loop class="video-background">
+        <source src="assets/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Main Container -->
+    <div class="h-screen flex flex-col justify-between p-4 content-overlay">
+        <!-- Header: User Info & QR Code -->
+        <div class="relative mb-6 animate-fade-in-up delay-100">
+            <h2 class="font-montserrat text-2xl font-bold mb-1">David Theo</h2>
+            <p class="font-montserrat text-lg">123129389128</p>
+            <div class="w-16 h-16 absolute top-0 right-0 rounded-full">
+                <img src="assets/dummy-qr-code.png" alt="QR Code" class="w-full h-full">
+            </div>
+        </div>
+
+        <!-- Main Content: Event Title -->
+        <div class="text-center space-y-4 flex-grow flex flex-col justify-center mb-4">
+            <p class="font-montserrat text-lg italic animate-fade-in-up delay-200">
+                Selami pesta penuh keanggunan dan kenangan abadi
+            </p>
+            
+            <div class="my-6 animate-fade-in-up delay-300">
+                <h1 class="font-playfair text-5xl font-bold tracking-wider mb-1">PROM</h1>
+                <h1 class="font-playfair text-5xl font-bold tracking-wider">NIGHT</h1>
+            </div>
+            
+            <p class="font-montserrat text-2xl font-semibold animate-fade-in-up delay-400">SMANKA</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-2 mb-4">
+            <!-- Add to Calendar Button -->
+            <div class="animate-fade-in-up delay-500 bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter cursor-pointer 
+                hover:bg-cyan-700 transition-all duration-150
+                max-w-xs mx-auto w-full flex items-center justify-between" 
+                onclick="addToCalendar()">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>13 April 2025 - 15.30</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            
+            <!-- Location Button -->
+            <a href="https://maps.app.goo.gl/yQJWPahRdbyLXwsf9" target="_blank" 
+               class="animate-fade-in-up delay-600 block max-w-xs mx-auto w-full">
+                <div class="bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter
+                    hover:bg-cyan-700 transition-all duration-150
+                    flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Gedung Kesenian Blitar</span>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            
+            <!-- Rundown Button -->
+            <a href="rundown.html" class="animate-fade-in-up delay-700 block max-w-xs mx-auto w-full">
+                <div class="bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter
+                    hover:bg-cyan-700 transition-all duration-150
+                    flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-clock"></i>
+                        <span>Lihat Rundown</span>
+                    </div>
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="grid grid-cols-4 gap-2 mb-2 animate-fade-in-up delay-500">
+            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                <span class="font-montserrat text-2xl font-bold" id="days">00</span>
+                <span class="font-montserrat text-xs">Hari</span>
+            </div>
+            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                <span class="font-montserrat text-2xl font-bold" id="hours">00</span>
+                <span class="font-montserrat text-xs">Jam</span>
+            </div>
+            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                <span class="font-montserrat text-2xl font-bold" id="minutes">00</span>
+                <span class="font-montserrat text-xs">Menit</span>
+            </div>
+            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                <span class="font-montserrat text-2xl font-bold" id="seconds">00</span>
+                <span class="font-montserrat text-xs">Detik</span>
+            </div>
+        </div>
+
+        <!-- JavaScript for Countdown and Calendar -->
+        <script>
+            // Countdown Timer Function
+            function updateCountdown() {
+                const eventDate = new Date('April 13, 2025 15:30:00').getTime();
+                const now = new Date().getTime();
+                const gap = eventDate - now;
+
+                // Time calculations
+                const second = 1000;
+                const minute = second * 60;
+                const hour = minute * 60;
+                const day = hour * 24;
+
+                // Calculate remaining time
+                const d = Math.floor(gap / day);
+                const h = Math.floor((gap % day) / hour);
+                const m = Math.floor((gap % hour) / minute);
+                const s = Math.floor((gap % minute) / second);
+
+                // Update DOM elements
+                document.getElementById('days').innerText = d.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+            }
+
+            // Initialize countdown
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // Add to Calendar Function
+            function addToCalendar() {
+                const event = {
+                    title: 'Prom Night SMANKA',
+                    location: 'Gedung Kesenian Blitar', 
+                    start: '20250413T153000',
+                    end: '20250413T220000'
+                };
+                
+                const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&location=${encodeURIComponent(event.location)}&dates=${event.start}/${event.end}`;
+                window.open(googleCalendarUrl, '_blank');
+            }
+        </script>
+
+        <!-- Footer -->
+        <div class="text-center animate-fade-in-up delay-600">
+            <p class="font-montserrat text-xs mb-1 leading-relaxed">
+                Mari jadikan pesta ini abadi<br>
+                seperti lautan—sampai jumpa<br>
+                di bawah ombak!
+            </p>
+            <p class="font-montserrat text-xl font-bold mb-0.5 text-right">MEJA 1</p>
+            <p class="font-montserrat text-[10px]">manage by Madukara</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- External Resources -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <title>Rundown Prom Night</title>
+    
+    <style>
+        /* Font Family Definitions */
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        /* Video Background Styling */
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+        
+        /* Content Overlay */
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
+        }
+        
+        /* Icon Color */
+        .icon-blue {
+            color: #3B82F6;
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Animation Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        
+        /* Initial Animation State */
+        [class*="animate-"] {
+            opacity: 0;
+        }
+        
+        /* Timeline Item Hover Effect */
+        .timeline-item {
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom Scrollbar Styling */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(8, 145, 178, 0.6);
+            border-radius: 10px;
+        }
+        
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 768px) {
+            .video-background { object-position: center; }
+            .text-4xl { font-size: 2rem; }
+            .text-xl { font-size: 1rem; }
+            .text-2xl { font-size: 1.25rem; }
+            .p-6 { padding: 0.75rem; }
+            .p-4 { padding: 0.5rem; }
+            .mb-8 { margin-bottom: 0.75rem; }
+            .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+                --tw-space-y-reverse: 0;
+                margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+                margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+            }
+            .rounded-xl { border-radius: 0.5rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <!-- Background Video -->
+    <video autoplay muted loop class="video-background">
+        <source src="assets/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Main Container -->
+    <div class="h-screen flex flex-col justify-between p-4 content-overlay">
+        <!-- Header Section -->
+        <div class="text-center mb-4 animate-fade-in-up delay-100">
+            <h1 class="font-playfair text-3xl md:text-4xl font-bold mb-1">RUNDOWN</h1>
+            <p class="font-montserrat text-lg md:text-xl">PROM NIGHT SMANKA</p>
+        </div>
+
+        <!-- Timeline Container -->
+        <div class="flex-grow overflow-y-auto custom-scrollbar space-y-3 mb-4">
+            <div class="max-w-md mx-auto space-y-3">
+                <!-- Pra Acara Section -->
+                <div class="bg-black bg-opacity-50 p-3 rounded-xl text-center animate-fade-in-up delay-200">
+                    <div class="font-montserrat text-xl md:text-2xl font-bold">
+                        <i class="fas fa-hourglass-start me-2 text-[rgb(8,145,178)]"></i>Pra Acara
+                    </div>
+                </div>
+
+                <!-- Pra Acara Timeline Items -->
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-300">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">18:30 - 18:50</div>
+                    <div class="font-montserrat text-sm md:text-base">Registrasi Wisudawan</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-400">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">18:50 - 19:00</div>
+                    <div class="font-montserrat text-sm md:text-base">Persembahan Tari & Band</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-500">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">19:00 - 19:10</div>
+                    <div class="font-montserrat text-sm md:text-base">Transisi MC</div>
+                </div>
+
+                <!-- Acara Utama Section -->
+                <div class="bg-black bg-opacity-50 p-3 rounded-xl text-center animate-fade-in-up delay-200">
+                    <div class="font-montserrat text-xl md:text-2xl font-bold">
+                        <i class="fas fa-star me-2 text-[rgb(8,145,178)]"></i>Acara Utama
+                    </div>
+                </div>
+
+                <!-- Acara Utama Timeline Items -->
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-300">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">19:10 - 19:30</div>
+                    <div class="font-montserrat text-sm md:text-base">Welcome & Opening</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-400">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">19:30 - 19:45</div>
+                    <div class="font-montserrat text-sm md:text-base">Hiburan Awal</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-500">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">19:45 - 20:15</div>
+                    <div class="font-montserrat text-sm md:text-base">Dinner & Live Band</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-600">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">20:15 - 20:45</div>
+                    <div class="font-montserrat text-sm md:text-base">Persembahan Bagian 2</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-700">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">20:45 - 21:00</div>
+                    <div class="font-montserrat text-sm md:text-base">Eternal Ocean Memories</div>
+                </div>
+
+                <div class="timeline-item bg-black bg-opacity-50 p-3 rounded-xl animate-fade-in-up delay-700">
+                    <div class="font-montserrat text-lg md:text-xl font-bold mb-1">21:00 - 22:00</div>
+                    <div class="font-montserrat text-sm md:text-base">Hiburan Utama dan Perayaan</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back Button & Footer -->
+        <div class="text-center animate-fade-in-up delay-700">
+            <a href="index.html" class="block max-w-md mx-auto w-full">
+                <div class="bg-cyan-600 text-white text-base md:text-lg px-4 py-2 rounded-full font-inter
+                    hover:bg-cyan-700 transition-all duration-150
+                    flex items-center justify-center gap-2">
+                    <i class="fas fa-arrow-left"></i>
+                    Kembali ke Halaman Utama
+                </div>
+            </a>
+            <p class="font-inter text-xs mt-3">manage by Madukara</p>
+        </div>
+    </div>
+</body>
+</html>
