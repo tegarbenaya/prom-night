@@ -96,156 +96,259 @@
             .gap-4 { gap: 0.75rem; }
             .text-md { font-size: 0.875rem; }
         }
+
+        /* Tambahan style untuk splash screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="min-h-screen text-white">
-    <!-- Background Video -->
-    <video autoplay muted loop class="video-background">
-        <source src="assets/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4">
-    </video>
-    
-    <!-- Main Container -->
-    <div class="h-screen flex flex-col justify-between p-4 content-overlay">
-        <!-- Header: User Info & QR Code -->
-        <div class="relative mb-6 animate-fade-in-up delay-100">
-            <h2 class="font-montserrat text-2xl font-bold mb-1">David Theo</h2>
-            <p class="font-montserrat text-lg">123129389128</p>
-            <div class="w-16 h-16 absolute top-0 right-0 rounded-full">
-                <img src="assets/dummy-qr-code.png" alt="QR Code" class="w-full h-full">
-            </div>
-        </div>
-
-        <!-- Main Content: Event Title -->
-        <div class="text-center space-y-4 flex-grow flex flex-col justify-center mb-4">
-            <p class="font-montserrat text-lg italic animate-fade-in-up delay-200">
-                Selami pesta penuh keanggunan dan kenangan abadi
-            </p>
-            
-            <div class="my-6 animate-fade-in-up delay-300">
-                <h1 class="font-playfair text-5xl font-bold tracking-wider mb-1">PROM</h1>
-                <h1 class="font-playfair text-5xl font-bold tracking-wider">NIGHT</h1>
-            </div>
-            
-            <p class="font-montserrat text-2xl font-semibold animate-fade-in-up delay-400">SMANKA</p>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="space-y-2 mb-4">
-            <!-- Add to Calendar Button -->
-            <div class="animate-fade-in-up delay-500 bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter cursor-pointer 
-                hover:bg-cyan-700 transition-all duration-150
-                max-w-xs mx-auto w-full flex items-center justify-between" 
-                onclick="addToCalendar()">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-calendar-plus"></i>
-                    <span>13 April 2025 - 15.30</span>
-                </div>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            
-            <!-- Location Button -->
-            <a href="https://maps.app.goo.gl/yQJWPahRdbyLXwsf9" target="_blank" 
-               class="animate-fade-in-up delay-600 block max-w-xs mx-auto w-full">
-                <div class="bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter
-                    hover:bg-cyan-700 transition-all duration-150
-                    flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Gedung Kesenian Blitar</span>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-            
-            <!-- Rundown Button -->
-            <a href="rundown.html" class="animate-fade-in-up delay-700 block max-w-xs mx-auto w-full">
-                <div class="bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter
-                    hover:bg-cyan-700 transition-all duration-150
-                    flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-clock"></i>
-                        <span>Lihat Rundown</span>
-                    </div>
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </a>
-        </div>
-
-        <!-- Countdown Timer -->
-        <div class="grid grid-cols-4 gap-2 mb-2 animate-fade-in-up delay-500">
-            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
-                <span class="font-montserrat text-2xl font-bold" id="days">00</span>
-                <span class="font-montserrat text-xs">Hari</span>
-            </div>
-            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
-                <span class="font-montserrat text-2xl font-bold" id="hours">00</span>
-                <span class="font-montserrat text-xs">Jam</span>
-            </div>
-            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
-                <span class="font-montserrat text-2xl font-bold" id="minutes">00</span>
-                <span class="font-montserrat text-xs">Menit</span>
-            </div>
-            <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
-                <span class="font-montserrat text-2xl font-bold" id="seconds">00</span>
-                <span class="font-montserrat text-xs">Detik</span>
-            </div>
-        </div>
-
-        <!-- JavaScript for Countdown and Calendar -->
-        <script>
-            // Countdown Timer Function
-            function updateCountdown() {
-                const eventDate = new Date('April 13, 2025 15:30:00').getTime();
-                const now = new Date().getTime();
-                const gap = eventDate - now;
-
-                // Time calculations
-                const second = 1000;
-                const minute = second * 60;
-                const hour = minute * 60;
-                const day = hour * 24;
-
-                // Calculate remaining time
-                const d = Math.floor(gap / day);
-                const h = Math.floor((gap % day) / hour);
-                const m = Math.floor((gap % hour) / minute);
-                const s = Math.floor((gap % minute) / second);
-
-                // Update DOM elements
-                document.getElementById('days').innerText = d.toString().padStart(2, '0');
-                document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-                document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-                document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
-            }
-
-            // Initialize countdown
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-
-            // Add to Calendar Function
-            function addToCalendar() {
-                const event = {
-                    title: 'Prom Night SMANKA',
-                    location: 'Gedung Kesenian Blitar', 
-                    start: '20250413T153000',
-                    end: '20250413T220000'
-                };
-                
-                const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&location=${encodeURIComponent(event.location)}&dates=${event.start}/${event.end}`;
-                window.open(googleCalendarUrl, '_blank');
-            }
-        </script>
-
-        <!-- Footer -->
-        <div class="text-center animate-fade-in-up delay-600">
-            <p class="font-montserrat text-xs mb-1 leading-relaxed">
-                Mari jadikan pesta ini abadi<br>
-                seperti lautan—sampai jumpa<br>
-                di bawah ombak!
-            </p>
-            <p class="font-montserrat text-xl font-bold mb-0.5 text-right">MEJA 1</p>
-            <p class="font-montserrat text-[10px]">manage by Madukara</p>
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="splash-screen text-center">
+        <video autoplay muted loop class="video-background">
+            <source src="assets/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4">
+        </video>
+        <audio id="backgroundMusic">
+            <source src="assets/memories one piece.mp3" type="audio/mp3">
+        </audio>
+        <div class="content-overlay w-full h-full flex flex-col justify-center items-center">
+            <img src="assets/logo.png" alt="Logo" class="w-48 h-auto mb-8 animate-fade-in-up">
+            <p class="font-montserrat text-2xl mb-2 animate-fade-in-up delay-100">Kepada:</p>
+            <h2 class="font-playfair text-4xl font-bold mb-8 animate-fade-in-up delay-200">David Theo</h2>
+            <button onclick="showMainContent(); startConfetti()" 
+                class="group relative bg-cyan-600 text-white px-8 py-3 rounded-full font-inter
+                transition-all duration-300 animate-fade-in-up delay-300 overflow-hidden
+                hover:shadow-[0_0_20px_rgba(8,145,178,0.6)] hover:scale-105">
+                <span class="relative z-10 flex items-center gap-2">
+                    Buka Undangan
+                    <i class="fas fa-envelope-open transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                </span>
+                <div class="absolute inset-0 bg-gradient-to-r from-cyan-600 to-cyan-400
+                    transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </button>
+            <p class="text-sm absolute bottom-4 animate-fade-in-up delay-400">Managed by Madukara</p>
         </div>
     </div>
+
+    <!-- Main Content - Initially Hidden -->
+    <div id="mainContent" class="hidden">
+        <!-- Background Video -->
+        <video autoplay muted loop class="video-background">
+            <source src="assets/1918465-uhd_3840_2160_24fps.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Main Container -->
+        <div class="h-screen flex flex-col justify-between p-4 content-overlay">
+            <!-- Header: User Info & QR Code -->
+            <div class="relative mb-6 animate-fade-in-up delay-100">
+                <h2 class="font-montserrat text-2xl font-bold mb-1">David Theo</h2>
+                <p class="font-montserrat text-lg">123129389128</p>
+                <div class="w-16 h-16 absolute top-0 right-0 rounded-full">
+                    <img src="assets/dummy-qr-code.png" alt="QR Code" class="w-full h-full">
+                </div>
+            </div>
+
+            <!-- Main Content: Event Title -->
+            <div class="text-center space-y-4 flex-grow flex flex-col justify-center mb-4">
+                <p class="font-montserrat text-lg italic animate-fade-in-up delay-200">
+                    Selami pesta penuh keanggunan dan kenangan abadi
+                </p>
+                
+                <div class="my-6 animate-fade-in-up delay-300">
+                    <h1 class="font-playfair text-5xl font-bold tracking-wider mb-1">PROM</h1>
+                    <h1 class="font-playfair text-5xl font-bold tracking-wider">NIGHT</h1>
+                </div>
+                
+                <p class="font-montserrat text-2xl font-semibold animate-fade-in-up delay-400">SMANKA</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2 mb-4">
+                <!-- Add to Calendar Button -->
+                <div class="animate-fade-in-up delay-500 group relative bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter cursor-pointer 
+                    transition-all duration-300 overflow-hidden
+                    hover:shadow-[0_0_20px_rgba(8,145,178,0.6)]
+                    max-w-xs mx-auto w-full flex items-center justify-between" 
+                    onclick="addToCalendar()">
+                    <div class="flex items-center gap-2 relative z-10">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>13 April 2025 - 15.30</span>
+                    </div>
+                    <i class="fas fa-chevron-right relative z-10 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-600 to-cyan-400
+                        transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </div>
+                
+                <!-- Location Button -->
+                <a href="https://maps.app.goo.gl/yQJWPahRdbyLXwsf9" target="_blank" 
+                class="animate-fade-in-up delay-600 block max-w-xs mx-auto w-full">
+                    <div class="group relative bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter
+                        transition-all duration-300 overflow-hidden
+                        hover:shadow-[0_0_20px_rgba(8,145,178,0.6)]
+                        flex items-center justify-between">
+                        <div class="flex items-center gap-2 relative z-10">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Gedung Kesenian Blitar</span>
+                        </div>
+                        <i class="fas fa-chevron-right relative z-10 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-600 to-cyan-400
+                            transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </div>
+                </a>
+                
+                <!-- Rundown Button -->
+                <a href="rundown.html" class="animate-fade-in-up delay-700 block max-w-xs mx-auto w-full">
+                    <div class="group relative bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full font-inter
+                        transition-all duration-300 overflow-hidden
+                        hover:shadow-[0_0_20px_rgba(8,145,178,0.6)]
+                        flex items-center justify-between">
+                        <div class="flex items-center gap-2 relative z-10">
+                            <i class="fas fa-clock"></i>
+                            <span>Lihat Rundown</span>
+                        </div>
+                        <i class="fas fa-chevron-right relative z-10 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-600 to-cyan-400
+                            transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="grid grid-cols-4 gap-2 mb-2 animate-fade-in-up delay-500">
+                <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                    <span class="font-montserrat text-2xl font-bold" id="days">00</span>
+                    <span class="font-montserrat text-xs">Hari</span>
+                </div>
+                <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                    <span class="font-montserrat text-2xl font-bold" id="hours">00</span>
+                    <span class="font-montserrat text-xs">Jam</span>
+                </div>
+                <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                    <span class="font-montserrat text-2xl font-bold" id="minutes">00</span>
+                    <span class="font-montserrat text-xs">Menit</span>
+                </div>
+                <div class="bg-black bg-opacity-50 h-16 rounded-lg flex flex-col items-center justify-center">
+                    <span class="font-montserrat text-2xl font-bold" id="seconds">00</span>
+                    <span class="font-montserrat text-xs">Detik</span>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center animate-fade-in-up delay-600">
+                <p class="font-montserrat text-xs mb-1 leading-relaxed">
+                    Mari jadikan pesta ini abadi<br>
+                    seperti lautan—sampai jumpa<br>
+                    di bawah ombak!
+                </p>
+                <p class="font-montserrat text-xl font-bold mb-0.5 text-right">MEJA 1</p>
+                <p class="font-montserrat text-xs mt-3">Managed by Madukara</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Countdown and Calendar -->
+    <script>
+        // Countdown Timer Function
+        function updateCountdown() {
+            const eventDate = new Date('April 13, 2025 15:30:00').getTime();
+            const now = new Date().getTime();
+            const gap = eventDate - now;
+
+            // Time calculations
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            // Calculate remaining time
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            // Update DOM elements
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }
+
+        // Initialize countdown
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Add to Calendar Function
+        function addToCalendar() {
+            const event = {
+                title: 'Prom Night SMANKA',
+                location: 'Gedung Kesenian Blitar', 
+                start: '20250413T153000',
+                end: '20250413T220000'
+            };
+            
+            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&location=${encodeURIComponent(event.location)}&dates=${event.start}/${event.end}`;
+            window.open(googleCalendarUrl, '_blank');
+        }
+
+        // Tambahkan fungsi untuk menampilkan konten utama
+        function showMainContent() {
+            const splash = document.getElementById('splashScreen');
+            const main = document.getElementById('mainContent');
+            const music = document.getElementById('backgroundMusic');
+            
+            // Tambahkan event listener untuk memastikan musik dapat diputar
+            const playMusic = () => {
+                music.volume = 0.5; // Set volume ke 50%
+                music.play()
+                    .then(() => {
+                        console.log("Musik berhasil diputar");
+                    })
+                    .catch(error => {
+                        console.log("Pemutaran musik gagal:", error);
+                    });
+            };
+
+            // Coba putar musik
+            playMusic();
+            
+            // Tambahkan event listener untuk memastikan musik tetap dapat diputar
+            document.addEventListener('click', playMusic, { once: true });
+            
+            splash.classList.add('fade-out');
+            main.classList.remove('hidden');
+            
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 500);
+        }
+    </script>
+
+    <!-- Tambahkan script confetti di bagian bawah sebelum closing body tag -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function startConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
 </body>
 </html>
